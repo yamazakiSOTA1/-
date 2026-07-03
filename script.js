@@ -2,12 +2,15 @@ const soundSelect = document.getElementById("soundSelect");
 const audioPlayer = document.getElementById("audioPlayer");
 const statusText = document.getElementById("status");
 const permissionButton = document.getElementById("permissionButton");
+const debugToggle = document.getElementById("debugToggle");
+const debugInfo = document.getElementById("debugInfo");
 
 const soundDirectory = "sounds/";
 const threshold = 15; // 振ったときの加速度閾値
 const cooldownMs = 700;
 let lastShakeTime = 0;
 let listening = false;
+let debugMode = false;
 
 function updateAudioSource() {
   const selectedFile = soundSelect.value;
@@ -28,6 +31,16 @@ function handleMotion(event) {
   const y = acceleration.y || 0;
   const z = acceleration.z || 0;
   const magnitude = Math.sqrt(x * x + y * y + z * z);
+
+  // デバッグ表示
+  if (debugMode) {
+    document.getElementById("accelX").textContent = x.toFixed(2);
+    document.getElementById("accelY").textContent = y.toFixed(2);
+    document.getElementById("accelZ").textContent = z.toFixed(2);
+    document.getElementById("magnitude").textContent = magnitude.toFixed(2);
+    const shakeDetectedEl = document.getElementById("shakeDetected");
+    shakeDetectedEl.textContent = magnitude > threshold ? "⚡ 振動検出！" : "";
+  }
 
   if (magnitude > threshold) {
     const now = Date.now();
@@ -81,11 +94,19 @@ function startListening() {
 
 soundSelect.addEventListener("change", () => {
   updateAudioSource();
-  setStatus(`${soundSelect.options[soundSelect.selectedIndex].text} を選択しました。スマホを振ると再生されます。');
+  setStatus(`${soundSelect.options[soundSelect.selectedIndex].text} を選択しました。スマホを振ると再生されます。`);
 });
 
 permissionButton.addEventListener("click", () => {
   startListening();
+});
+
+debugToggle.addEventListener("change", () => {
+  debugMode = debugToggle.checked;
+  debugInfo.style.display = debugMode ? "block" : "none";
+  if (debugMode && !listening) {
+    setStatus("デバッグモードON。「振動許可を求める」を押して、スマホの加速度データを確認してください。");
+  }
 });
 
 updateAudioSource();

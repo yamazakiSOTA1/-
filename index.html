@@ -34,6 +34,22 @@
     <div class="card status-card">
       <p id="status">準備OKです。スマホを振ってください。</p>
     </div>
+
+    <div class="card debug-card">
+      <label>
+        <input type="checkbox" id="debugToggle" />
+        デバッグモード（加速度をリアルタイム表示）
+      </label>
+      <div id="debugInfo" style="display: none; margin-top: 1rem; font-family: monospace; font-size: 0.9rem; background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 8px;">
+        <div>X: <span id="accelX">0.00</span></div>
+        <div>Y: <span id="accelY">0.00</span></div>
+        <div>Z: <span id="accelZ">0.00</span></div>
+        <div style="margin-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 0.5rem;">
+          大きさ: <span id="magnitude">0.00</span> (閾値: <span id="thresholdValue">15</span>)
+        </div>
+        <div id="shakeDetected" style="margin-top: 0.5rem; color: #58a6ff;"></div>
+      </div>
+    </div>
   </main>
 
   <audio id="audioPlayer" preload="auto"></audio>

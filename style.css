@@ -83,3 +83,18 @@ button:hover {
   margin: 0;
   font-weight: 600;
 }
+
+.debug-card label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.debug-card input[type="checkbox"] {
+  width: auto;
+  height: 1.2rem;
+  width: 1.2rem;
+  cursor: pointer;
+}
+
