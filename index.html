@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>振ったら音が鳴る</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <h1>スマホを振って音を鳴らそう</h1>
+    <p>画面を振ると選んだ音声が再生されます。</p>
+
+    <div class="card">
+      <label for="soundSelect">再生する音を選ぶ</label>
+      <select id="soundSelect">
+        <option value="ガラスが割れる2.mp3">ガラスが割れる</option>
+        <option value="パンチの素振り1.mp3">パンチの素振り</option>
+        <option value="パンチ素振り (1).mp3">パンチ素振り (1)</option>
+        <option value="ロボットを強く殴る2.mp3">ロボットを強く殴る</option>
+        <option value="刀で斬る2.mp3">刀で斬る</option>
+        <option value="剣で斬る2.mp3">剣で斬る</option>
+        <option value="打撃1.mp3">打撃</option>
+        <option value="盾で防御.mp3">盾で防御</option>
+        <option value="重いパンチ2.mp3">重いパンチ</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <button id="permissionButton">振動許可を求める</button>
+      <p class="help-text">iOS では最初に許可が必要です。</p>
+    </div>
+
+    <div class="card status-card">
+      <p id="status">準備OKです。スマホを振ってください。</p>
+    </div>
+  </main>
+
+  <audio id="audioPlayer" preload="auto"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
